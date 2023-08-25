@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import 'cypress-iframe'
 
 const filename = 'cypress/downloads/dataRecebimentoCaixa.json'
 //const dayjs = require('dayjs'); // função para pegar o dia de hoje
@@ -19,11 +20,15 @@ describe('login Lis', () => {
     cy.get('#zenLayoutTableCell_6').click()
     cy.get('#boxPesquisa').type('script').type('{enter}')
     cy.contains('Gerar Script').click()
-     //cy.iframe('iframe[id=iframe_41]')
-     //.find('input[id=btnModal_13]').click()
-     //cy.iframe('iframe[id=iframe_41]')
-     //.find('input[id=plano]').type('SULA')
+     
+    //carregar conteudo iframe_41
 
+    cy.frameLoaded('iframe[id=iframe_41]')
+    cy.iframe('iframe[id=iframe_41]').wait(500)
+      .find('[id=btnModal_13]').click()
+      cy.iframe('iframe[id=iframe_41]').tab().type('7202').type('{enter}', {force: true}) //cy.iframe('iframe[id=iframe_41]') = get para interação
+      cy.wait(500)
+      cy.iframe('iframe[id=iframe_41]').contains('VALE SA').click()
     cy.log(amostra)
      })
  })
