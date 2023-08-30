@@ -24,7 +24,7 @@ describe('login Lis', () => {
 //carregar conteudo iframe_41
     cy.frameLoaded('iframe[id=iframe_41]')
 //Preenchimento campo convenio
-    cy.iframe('iframe[id=iframe_41]').wait(500)
+    cy.iframe('iframe[id=iframe_41]').wait(1500)
       .find('[id=btnModal_13]').click()
       cy.iframe('iframe[id=iframe_41]').tab().type('7202').type('{enter}',{force: true}) //cy.iframe('iframe[id=iframe_41]') = get para interação
       cy.wait(500)
@@ -36,7 +36,8 @@ describe('login Lis', () => {
       cy.wait(500)
       cy.iframe('iframe[id=iframe_41]').contains('CVRD').click()
       cy.iframe('iframe[id=iframe_41]').contains('CVRDP').click().wait(500)
-      cy.iframe('iframe[id=iframe_41]').find('input[id=input_15]').click({force: true})
+        cy.get('#zenMouseTrap').click(0, 0, {force: true})
+        //cy.iframe('iframe[id=iframe_41]').get("#zenMouseTrap").click(150,150,{force: true})
         //cy.iframe('iframe[id=iframe_41]').find('input[id=control_17]').type('01082023',{force: true}).type('{enter}', {force: true})
 
 //Preenchimento campo data inicial
