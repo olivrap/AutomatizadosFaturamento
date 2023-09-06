@@ -16,32 +16,30 @@ describe('login Lis', () => {
     cy.get('#control_14').type('jackson.linzmaier')
     cy.get('#control_16').type('s44Xepx6y3E*(')
     cy.get('#control_16').type('{enter}')
-    cy.get('.principal').type('{enter}').wait(500)
+    cy.get('.principal').type('{enter}').should('be.visible')
     cy.get('#zenLayoutTableCell_6').click()
     cy.get('#boxPesquisa').type('script').type('{enter}')
     cy.contains('Gerar Script').click()
-     
 //carregar conteudo iframe_41
     cy.frameLoaded('iframe[id=iframe_41]')
 //Preenchimento campo convenio
-    cy.iframe('iframe[id=iframe_41]').wait(500)
+    cy.iframe('iframe[id=iframe_41]').should('be.visible')
       .find('[id=btnModal_13]').click()
       cy.iframe('iframe[id=iframe_41]').tab().type('7202').type('{enter}',{force: true}) //cy.iframe('iframe[id=iframe_41]') = get para interação
-      cy.wait(500)
       cy.iframe('iframe[id=iframe_41]').contains('VALE SA').click()
 //Preenchimento campo plano
-    cy.iframe('iframe[id=iframe_41]').wait(500)
+    cy.iframe('iframe[id=iframe_41]').should('be.visible')
       .find('[id=btnModal_15]').click()
      cy.iframe('iframe[id=iframe_41]').type('CVRD').type('{enter}',{force: true}) //cy.iframe('iframe[id=iframe_41]') = get para interação
-      cy.wait(500)
       cy.iframe('iframe[id=iframe_41]').contains('CVRD').click()
-      cy.iframe('iframe[id=iframe_41]').contains('CVRDP').click().wait(500)
-        cy.iframe('iframe[id=iframe_41]').get("#zenMouseTrap").click({force: true})
-        cy.iframe('iframe[id=iframe_41]').find('input[id=control_17]').click({force: true}).type('01082023',{force: true}).type('{enter}', {force: true})
-        cy.iframe('iframe[id=iframe_41]').find('input[id=control_19]').click({force: true}).type('10082023',{force: true}).type('{enter}', {force: true})
-        cy.iframe('iframe[id=iframe_41]').find('input[id=control_22]').click({force: true}).wait(50000)
-        cy.window().then((win) => { win.alert('Aceitar')})
-        //Preenchimento campo data inicial
+      cy.iframe('iframe[id=iframe_41]').contains('CVRDP').click();
+      cy.getIframeBody('iframe[id=iframe_41]').find('#zenFloatingDiv_48').invoke('css', 'display', 'none')
+        cy.iframe('iframe[id=iframe_41]').find('input[id=control_17]').click({force: true}).type('09082023',{force: true})
+          .type('{enter}', {force: true})
+        cy.iframe('iframe[id=iframe_41]').find('input[id=control_19]').click({force: true}).type('10082023',{force: true})
+          .type('{enter}', {force: true})
+          cy.iframe('iframe[id=iframe_41]').find('input[id=control_22]').click({force: true})
+          cy.get('body').type('{enter}', {force: true})
         cy.log(amostra)
      })
  })
